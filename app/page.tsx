@@ -114,8 +114,19 @@ export default function Home() {
       clearInterval(progressInterval);
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || "Analysis failed");
+        let errorMessage = "Analysis failed";
+        try {
+          const err = await response.json();
+          errorMessage = err.error || errorMessage;
+        } catch {
+          const text = await response.text().catch(() => "");
+          if (response.status === 413) {
+            errorMessage = "PDF is too large. Vercel free tier allows max ~4.5MB requests.";
+          } else {
+            errorMessage = text || `Server error (${response.status})`;
+          }
+        }
+        throw new Error(errorMessage);
       }
 
       const data: BrandData = await response.json();

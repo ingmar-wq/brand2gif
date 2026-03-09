@@ -20,9 +20,9 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "No PDF file provided." }, { status: 400 });
     }
 
-    if (file.size > 20 * 1024 * 1024) {
+    if (file.size > 4.5 * 1024 * 1024) {
       return Response.json(
-        { error: "PDF file is too large. Maximum size is 20MB." },
+        { error: "PDF file is too large. Maximum size is 4.5MB." },
         { status: 400 }
       );
     }

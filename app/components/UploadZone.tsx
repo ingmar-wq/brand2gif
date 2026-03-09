@@ -27,8 +27,8 @@ export default function UploadZone({
         return;
       }
 
-      if (file.size > 20 * 1024 * 1024) {
-        setError("File is too large. Maximum size is 20MB.");
+      if (file.size > 4.5 * 1024 * 1024) {
+        setError("File is too large. Maximum size is 4.5MB (Vercel free tier limit).");
         return;
       }
 
@@ -165,7 +165,7 @@ export default function UploadZone({
                 Drop your brand guide PDF here
               </p>
               <p className="text-zinc-500 text-sm mt-1">
-                or click to browse · PDF only · max 20MB
+                or click to browse · PDF only · max 4.5MB
               </p>
             </div>
           </div>
